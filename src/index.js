@@ -42,7 +42,7 @@ export function ExcelRenderer(file, callback) {
       reader.onload = function(e) {
         /* Parse data */
         var bstr = e.target.result;
-        var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array", cellDates: true, cellText: false, dateNF: 'DD"/"MM"/"YYYY' });
+        var wb = XLSX.read(bstr, { type: "binary", cellDates: true, cellText: false, dateNF: 'DD"/"MM"/"YYYY' });
 
         /* Get first worksheet */
         var wsname = wb.SheetNames[0];
