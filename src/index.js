@@ -42,14 +42,14 @@ export function ExcelRenderer(file, callback) {
       reader.onload = function(e) {
         /* Parse data */
         var bstr = e.target.result;
-        var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
+        var wb = XLSX.read(bstr, { type: rABS ? "binary" : "array", cellDates: true, cellText: false, dateNF: 'DD"/"MM"/"YYYY' });
 
         /* Get first worksheet */
         var wsname = wb.SheetNames[0];
         var ws = wb.Sheets[wsname];
 
         /* Convert array of arrays */
-        var json = XLSX.utils.sheet_to_json(ws, { header: 1 });
+        var json = XLSX.utils.sheet_to_json(ws, { header: 1, raw: true });
         var cols = make_cols(ws["!ref"]);
 
         var data = { rows: json, cols: cols };
